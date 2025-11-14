@@ -1,6 +1,169 @@
-# Детектус (Detectus)
+# Detectus / Детектус
 
-Сервис для проверки медиафайлов на наличие сгенерированного контента
+**English** | [Русский](#русский)
+
+---
+
+# Detectus
+
+Service for checking media files for AI-generated content
+
+## Description
+
+Detectus is a web application for analyzing images for AI-generation and deepfake manipulation. The service uses the Sightengine platform for artificial content detection through an automated Selenium browser.
+
+## Features
+
+- 📁 **Image upload** via drag & drop or file selection
+- 🤖 **AI-generation analysis** - detection of neural network generated images
+- 🎭 **Deepfake detection** - identification of face manipulations
+- 📊 **Detailed statistics** - probability percentages across different categories
+- 🏷️ **Model identification** - detection of specific diffusion and GAN models
+- 📚 **Analysis history** - save and review previous checks
+- 📱 **Responsive interface** - works on desktop and mobile devices
+
+## Technology Stack
+
+### Backend
+- **FastAPI** - asynchronous web framework
+- **Selenium** - browser automation for Sightengine integration
+- **ChromeDriver** - Chrome browser management
+- **UUID** - unique file identifier generation
+- **JSONL** - analysis history storage
+
+### Frontend
+- **Vanilla JavaScript** - client-side logic
+- **CSS Grid/Flexbox** - responsive layout
+- **Fetch API** - backend communication
+- **Drag & Drop API** - convenient file upload
+
+## Installation & Setup
+
+### Prerequisites
+
+- Python 3.8+
+- Chrome/Chromium browser
+- [Sightengine](https://sightengine.com/) account
+
+### 1. Clone Repository
+
+```bash
+git clone <repository-url>
+cd detectus
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Environment Configuration
+
+Create `.env` file in project root:
+
+```env
+SIGHTENGINE_EMAIL=your_email@sightengine.com
+SIGHTENGINE_PASSWORD=your_password
+```
+
+### 4. Run Application
+
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Application will be available at: `http://localhost:8000`
+
+## Project Structure
+
+```
+detectus/
+├── main.py                 # Main FastAPI application
+├── requirements.txt        # Python dependencies
+├── templates/
+│   └── index.html         # Main HTML template
+├── static/
+│   ├── style.css          # Application styles
+│   └── app.js            # Client-side JavaScript
+├── uploads/               # Uploaded files directory
+├── history.jsonl          # Analysis history file
+└── README.md             # Documentation
+```
+
+## API Endpoints
+
+### `POST /analyze`
+Analyze uploaded image
+
+**Parameters:**
+- `file`: image file (multipart/form-data)
+
+**Response:**
+```json
+{
+  "id": "unique_identifier",
+  "image_url": "/uploads/filename.jpg",
+  "summary": "Likely AI-generated",
+  "score": "85%",
+  "genai_percent": "85%",
+  "deepfake_percent": "12%",
+  "raw_text": "full_result_text"
+}
+```
+
+### `GET /history`
+Get analysis history
+
+**Parameters:**
+- `limit`: number of records (default: 10)
+
+### `GET /`
+Main application page
+
+## Usage
+
+1. **File Upload** - drag & drop image into upload area or select file manually
+2. **Start Analysis** - click "Send for Analysis" button
+3. **View Results** - examine detailed statistics in the right column
+4. **History** - return to previous analyses via bottom panel
+
+## Implementation Details
+
+- **Automatic authentication** on Sightengine via Selenium
+- **Large file handling** with progress indication
+- **Format validation** for supported image types
+- **Error handling** with user-friendly messages
+- **Headless mode** for server operation
+
+## Security
+
+- Passwords stored in environment variables
+- Unique filenames prevent conflicts
+- MIME-type validation for uploaded files
+
+## Development
+
+For development with visible browser:
+
+```python
+# In main.py comment out:
+# options.add_argument("--headless=new")
+```
+
+## License
+
+[Specify license]
+
+## Support
+
+For service-related questions contact: [contact information]
+
+---
+
+# Русский
+
+**English** | [Русский](#русский)
 
 ## Описание
 
