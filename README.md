@@ -153,11 +153,11 @@ For development with visible browser:
 
 ## License
 
-[Specify license]
+[MIT License]
 
 ## Support
 
-For service-related questions contact: [contact information]
+For service-related questions sign issue
 
 ---
 
@@ -310,8 +310,8 @@ detectus/
 
 ## Лицензия
 
-[Указать лицензию]
+[MIT License]
 
 ## Поддержка
 
-По вопросам работы сервиса обращайтесь: [контактная информация]
+По вопросам работы сервиса создайте issue
