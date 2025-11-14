@@ -23,8 +23,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 LOGIN_URL = "https://dashboard.sightengine.com/login"
 AI_URL = "https://dashboard.sightengine.com/ai-image-detection"
 
-EMAIL = os.getenv("SIGHTENGINE_EMAIL", "kuruevmaxamma@gmail.com")
+EMAIL = os.getenv("SIGHTENGINE_EMAIL", "arthurstark@yandex.ru")
 PASSWORD = os.getenv("SIGHTENGINE_PASSWORD", "Dagi@123")  # <-- лучше вынести в env в реальном проекте
+
+
+ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+ALLOWED_CONTENT_TYPES = {"image/jpeg", "image/png", "image/webp"}
 
 
 # ------- Логика ожидания результата -------
@@ -177,8 +181,22 @@ async def home():
 
 @app.post("/analyze")
 async def analyze_image(file: UploadFile = File(...)):
-    if not file.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="Нужно загрузить файл изображения")
+    # 1. Проверяем тип и расширение файла
+    original_name = file.filename or ""
+    _, ext = os.path.splitext(original_name)
+    ext = ext.lower()
+
+    if ext not in ALLOWED_EXTENSIONS or file.content_type not in ALLOWED_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=400,
+            detail="Поддерживаются только файлы JPG, JPEG, PNG и WEBP"
+        )
+
+
+
+
+#    if not file.content_type.startswith("image/"):
+#        raise HTTPException(status_code=400, detail="Нужно загрузить файл изображения")
 
     # 1. Читаем загруженный файл
     try:
@@ -237,7 +255,7 @@ async def analyze_image(file: UploadFile = File(...)):
 
 
 @app.get("/history")
-def get_history(limit: int = 10):
+def get_history(limit: int = 100):
     items = []
     if os.path.exists(HISTORY_FILE):
         with open(HISTORY_FILE, "r", encoding="utf-8") as f:

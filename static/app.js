@@ -124,6 +124,59 @@ function renderModelTags(container, items) {
     });
 }
 
+function translateSummaryShort(summary) {
+    if (!summary) return "";
+
+    const s = summary.toLowerCase();
+
+    if (s.includes("likely ai-generated")) {
+        return "Скорее всего ИИ";
+    }
+    if (s.includes("likely deepfake")) {
+        return "Скорее всего дипфейк";
+    }
+    if (s.includes("not likely to be ai-generated or deepfake")) {
+        return "Мало похоже на ИИ";
+    }
+    if (s.includes("uncertain if ai-generated or not")) {
+        return "Неопределённо (ИИ или нет)";
+    }
+    if (s.includes("uncertain if deepfake or not")) {
+        return "Неопределённо (дипфейк или нет)";
+    }
+
+    return summary;
+}
+
+
+function translateSummary(summary) {
+    if (!summary) return "";
+
+    const s = summary.toLowerCase();
+
+    if (s.includes("likely ai-generated")) {
+        return "Вероятно сгенерировано ИИ";
+    }
+    if (s.includes("likely deepfake")) {
+        return "Вероятно дипфейк";
+    }
+    if (s.includes("not likely to be ai-generated or deepfake")) {
+        return "Мало похоже на генерацию ИИ или дипфейк";
+    }
+    if (s.includes("uncertain if ai-generated or not")) {
+        return "Неопределённо, сгенерировано ИИ или нет";
+    }
+    if (s.includes("uncertain if deepfake or not")) {
+        return "Неопределённо, дипфейк это или нет";
+    }
+
+    // если пришла какая-то новая формулировка — показываем как есть
+    return summary;
+}
+
+
+
+
 // Настройка чипа summary (Likely AI-generated / Deepfake / Not AI)
 function applySummary(summary) {
     if (!summary) {
@@ -155,7 +208,8 @@ function applySummary(summary) {
         summaryChip.classList.add("notai");
     }
 
-    summaryText.textContent = summary;
+    // вместо summaryText.textContent = summary;
+    summaryText.textContent = translateSummary(summary);
     summaryChip.style.display = "inline-flex";
 }
 
@@ -191,7 +245,7 @@ function setLoading(isLoading) {
         analyzeBtn.disabled = true;
         analyzeSpinner.style.display = "block";
         analyzeText.textContent = "Анализируем...";
-        statusText.innerHTML = "<strong>Шаг 3.</strong> Идёт запрос к Sightengine, подождите…";
+        statusText.innerHTML = "<strong>Шаг 3.</strong> Идёт запрос, подождите…";
     } else {
         analyzeSpinner.style.display = "none";
         analyzeText.textContent = "Отправить на анализ";
@@ -279,9 +333,10 @@ function renderHistory(items) {
         thumb.appendChild(img);
 
         const infoWrap = document.createElement("div");
-        const main = document.createElement("div");
-        main.className = "history-info-main";
-        main.textContent = item.summary || "Без сводки";
+const main = document.createElement("div");
+main.className = "history-info-main";
+const title = translateSummaryShort(item.summary);
+main.textContent = title || "Нет вердикта";
 
         const sub = document.createElement("div");
         sub.className = "history-info-sub";
@@ -302,7 +357,7 @@ function renderHistory(items) {
 
 async function loadHistory() {
     try {
-        const res = await fetch("/history?limit=8");
+        const res = await fetch("/history?limit=100");
         if (!res.ok) {
             throw new Error("HTTP " + res.status);
         }
@@ -384,7 +439,7 @@ analyzeBtn.addEventListener("click", async () => {
         renderAnalysisResult(data, false);
 
         historyItems.unshift(data);
-        historyItems = historyItems.slice(0, 8);
+        historyItems = historyItems.slice(0, 100);
         renderHistory(historyItems);
     } catch (err) {
         console.error(err);

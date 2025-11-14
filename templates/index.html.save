@@ -4,16 +4,15 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/static/style.css">
 	<script defer src="/static/app.js"></script>
-	<title>Detectus</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AI / Deepfake анализ изображения</title>
     </head>
     <body>
         <div class="container">
             <div class="card">
                 <div>
-                    <div class="title">AI | Detectus</div>
+                    <div class="title">AI / D</div>
                     <div class="subtitle"> 
-                        Загрузите изображение — и мы вернём оценку «сгенерировано ИИ / Deepfake / ИИ не используется».
+                        Загрузите изображение — и мы вернём оценку «AI-generated / Deepfake / Not AI».
                     </div>
 
                     <div id="upload-area" class="upload-area">
@@ -65,7 +64,7 @@
 
                     <div class="score-blocks">
                         <div class="score-card">
-                            <div class="score-label">Общая оценка</div>
+                            <div class="score-label">Общий AI score</div>
                             <div id="score-total" class="score-value">–</div>
                             <div class="score-bar">
                                 <div id="score-total-bar" class="score-bar-fill"></div>
@@ -79,7 +78,7 @@
                             </div>
                         </div>
                         <div class="score-card">
-                            <div class="score-label">Манипуляции с лицом</div>
+                            <div class="score-label">Face manipulation</div>
                             <div id="score-deepfake" class="score-value">–</div>
                             <div class="score-bar">
                                 <div id="score-deepfake-bar" class="score-bar-fill deepfake"></div>
@@ -103,7 +102,7 @@
             </div>
 <div class="history">
     <div class="history-header">
-        <span class="history-title">Последние загрузки пользователей</span>
+        <span class="history-title">Последние анализы</span>
         <span class="history-note" id="history-note">Нет записей</span>
     </div>
     <div id="history-strip" class="history-strip"></div>

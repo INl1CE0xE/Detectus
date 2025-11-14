@@ -439,3 +439,172 @@
     font-size: 10px;
     color: #9ca3af;
 }
+
+/* ===================== */
+/* Адаптация под планшеты */
+/* ===================== */
+
+@media (max-width: 900px) {
+    .container {
+        padding: 16px;
+    }
+
+    .card {
+        grid-template-columns: 1fr;
+        padding: 18px 16px 14px;
+        gap: 16px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .results {
+        margin-top: 4px;
+    }
+
+    .history {
+        margin-top: 12px;
+        padding: 8px 10px 10px;
+    }
+
+    .history-info-main {
+        max-width: 120px;
+    }
+}
+
+/* ===================== */
+/* Адаптация под телефоны */
+/* ===================== */
+
+@media (max-width: 640px) {
+    body {
+        align-items: flex-start;
+        padding-top: 16px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 14px 12px 10px;
+        border-radius: 14px;
+        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .title {
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .upload-area {
+        padding: 12px 10px;
+        border-radius: 12px;
+    }
+
+    .upload-icon {
+        font-size: 26px;
+        margin-bottom: 4px;
+    }
+
+    .upload-title {
+        font-size: 13px;
+    }
+
+    .upload-hint {
+        font-size: 11px;
+    }
+
+    .preview-thumb {
+        width: 48px;
+        height: 48px;
+    }
+
+    .preview-info-main {
+        font-size: 12px;
+    }
+
+    .preview-info-sub {
+        font-size: 10px;
+    }
+
+    .actions {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .analyze-button {
+        width: 100%;
+        justify-content: center;
+        padding: 9px 12px;
+    }
+
+    .status-text {
+        font-size: 11px;
+    }
+
+    .results {
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .score-blocks {
+        grid-template-columns: 1fr;
+    }
+
+    .score-card {
+        padding: 7px 8px 6px;
+    }
+
+    .raw-block {
+        max-height: 100px;
+        font-size: 10px;
+    }
+
+    .result-image {
+        max-height: 35vh;
+    }
+
+    .history {
+        border-radius: 12px;
+        padding: 8px;
+    }
+
+    .history-strip {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .history-card {
+        min-width: 180px;
+    }
+
+    .history-info-main {
+        max-width: 110px;
+    }
+}
+
+/* Чуть улучшим поведение на тач-устройствах */
+
+button,
+.upload-area {
+    -webkit-tap-highlight-color: transparent;
+}
