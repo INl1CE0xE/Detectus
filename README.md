@@ -12,6 +12,8 @@ Service for checking media files for AI-generated content
 
 Detectus is a web application for analyzing images for AI-generation and deepfake manipulation. The service uses the Sightengine platform for artificial content detection through an automated Selenium browser.
 
+<img width="1021" height="836" alt="Снимок экрана 2025-11-15 122952" src="https://github.com/user-attachments/assets/e660cb60-dee7-44d5-bb17-f7eb8f9978c7" />
+
 ## Features
 
 - 📁 **Image upload** via drag & drop or file selection
